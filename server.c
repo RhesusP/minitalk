@@ -6,13 +6,21 @@
 /*   By: cbernot <cbernot@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:18:08 by cbernot           #+#    #+#             */
-/*   Updated: 2023/01/12 16:09:24 by cbernot          ###   ########.fr       */
+/*   Updated: 2023/01/13 00:18:53 by cbernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft/libft.h"
 #include <signal.h>
 
+/**
+ * @brief Add the character 'c' at the end of the string 'str' (it creates a new
+ * string and free the parameter).
+ * 
+ * @param str Base string
+ * @param c Char to add.
+ * @return char* str with c as last char. 
+ */
 static char	*add_char_to_str(char *str, char c)
 {
 	char			*res;
@@ -36,6 +44,12 @@ static char	*add_char_to_str(char *str, char c)
 	return (res);
 }
 
+/**
+ * @brief Signal handler for SIGUSR1 and SIGUSR2 used to receive and recreate
+ * a char byte by byte.
+ * 
+ * @param signal Received signal id.
+ */
 static void	signal_handler(int signal)
 {
 	static int	c = 0;

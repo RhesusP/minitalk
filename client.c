@@ -6,17 +6,21 @@
 /*   By: cbernot <cbernot@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:18:06 by cbernot           #+#    #+#             */
-/*   Updated: 2023/01/12 16:02:03 by cbernot          ###   ########.fr       */
+/*   Updated: 2023/01/13 00:14:16 by cbernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft/libft.h"
 #include <signal.h>
 
-// SIGUSR1 = 0
-// SIGUSR2 = 1
-// TODO boucle de temps plus petite pour minimiser le decqlqge possible lie 
-// a l imprecision de usleep
+/**
+ * @brief Send a char byte by byte using SIGUSR1 and SIGUSR2.
+ * @todo We can use a loop with a shorter duration to decrease the bit shifting due
+ * to usleep imprecision.
+ * 
+ * @param pid PID of the server.
+ * @param c The char to send.
+ */
 static void	send_char(int pid, int c)
 {
 	int	i;
@@ -39,6 +43,12 @@ static void	send_char(int pid, int c)
 	}
 }
 
+/**
+ * @brief Send a string char by char thanks to signals.
+ * 
+ * @param pid PID of the server. 
+ * @param msg String to send.
+ */
 static void	send_message(int pid, char *msg)
 {
 	unsigned int	i;
