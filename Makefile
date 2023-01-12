@@ -6,7 +6,7 @@
 #    By: cbernot <cbernot@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/02 15:24:06 by cbernot           #+#    #+#              #
-#    Updated: 2023/01/02 20:03:09 by cbernot          ###   ########.fr        #
+#    Updated: 2023/01/12 16:04:56 by cbernot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,11 +18,10 @@ CLIENT_NAME = client
 CLIENT_SRCS = ./client.c
 CLIENT_OBJS = ${CLIENT_SRCS:.c=.o}
 
-INCLUDES = ./includes/minitalk.h
-FLAGS = 
+FLAGS = -Wall -Wextra -Werror
 
-%.o: %.c ${INCLUDES}
-	cc ${FLAGS} -I ${INCLUDES} -c $< -o $@
+%.o: %.c
+	cc ${FLAGS} -c $< -o $@
 
 all: ${SERVER_NAME} ${CLIENT_NAME}
 

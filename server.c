@@ -6,65 +6,67 @@
 /*   By: cbernot <cbernot@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:18:08 by cbernot           #+#    #+#             */
-/*   Updated: 2023/01/03 09:57:16 by cbernot          ###   ########.fr       */
+/*   Updated: 2023/01/12 16:09:24 by cbernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/minitalk.h"
+#include "./libft/libft.h"
+#include <signal.h>
 
-int	ft_pow(int nb, int power)
+static char	*add_char_to_str(char *str, char c)
 {
-	int	res;
+	char			*res;
+	size_t			len;
+	unsigned int	i;
 
-	res = nb;
-	if (power < 0)
+	len = ft_strlen(str);
+	res = malloc(sizeof(char) * (len + 2));
+	if (!res)
 		return (0);
-	if (power == 0)
-		return (1);
-	else
-		res *= ft_pow(nb, power - 1);
+	i = 0;
+	while (str[i] != '\0')
+	{
+		res[i] = str[i];
+		i++;
+	}
+	res[i] = c;
+	res[i + 1] = '\0';
+	if (len > 0)
+		free (str);
 	return (res);
 }
 
-void	signal_handler(int signal, siginfo_t *info, void *context)
+static void	signal_handler(int signal)
 {
 	static int	c = 0;
 	static int	i = 0;
-	int			client_pid;
+	static char	*str = "";
 
-	client_pid = info->si_pid;
 	if (signal == SIGUSR2)
-		c = c | ft_pow(2, i);
+		c = c | 1 << i;
 	i++;
 	if (i == 8)
 	{
 		if (c == 0)
 		{
-			if (kill(client_pid, SIGUSR2) != 0);
-				exit(EXIT_FAILURE);
-			ft_putchar_fd('\n', 1);
+			ft_putstr_fd(str, 1);
+			if (ft_strlen(str) > 0)
+				free (str);
+			str = "";
 		}
-		ft_putchar_fd(c, 1);
-		kill(client_pid, SIGUSR1);
+		str = add_char_to_str(str, c);
 		i = 0;
 		c = 0;
 	}
 }
 
-int	main()
+int	main(void)
 {	
-	struct sigaction	s_act;
-	
 	ft_putstr_fd("[SERVER]: PID is ", 1);
 	ft_putnbr_fd(getpid(), 1);
 	ft_putchar_fd('\n', 1);
-
-	s_act.sa_sigaction = &signal_handler;
-	s_act.sa_flags = SA_SIGINFO;
-
-	sigaction(SIGUSR1, &s_act, NULL);
-	sigaction(SIGUSR2, &s_act, NULL);
-
+	signal(SIGUSR1, &signal_handler);
+	signal(SIGUSR2, &signal_handler);
 	while (1)
 		pause();
 	return (0);
