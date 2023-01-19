@@ -49,6 +49,6 @@ Server must:
 ## Useful links
 
 [minitalk-Tester by @ThibaudM13](https://github.com/ThibaudM13/minitalk-Tester)  
-[Cours "Gestion des Signaux" de Mr. Mandel à Polytech Paris-Sud](https://www.lri.fr/~mandel/systeme/systeme-06.pdf)
-[GeeksforGeeks course](https://www.geeksforgeeks.org/signals-c-language/)
+[Cours "Gestion des Signaux" de Mr. Mandel à Polytech Paris-Sud](https://www.lri.fr/~mandel/systeme/systeme-06.pdf)  
+[GeeksforGeeks course](https://www.geeksforgeeks.org/signals-c-language/)  
 [code(quoi) article "Sending and intercepting a signal in C"](https://www.codequoi.com/en/sending-and-intercepting-a-signal-in-c/)
