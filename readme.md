@@ -22,7 +22,6 @@ Server must:
 - print the string after fully receiving
 - be able to receive strings from several clients in a row without needing to restart.
 
-
 ## Usage
 
 #### Server
@@ -36,6 +35,16 @@ Server must:
 ```bash
 ./client [server_pid] [message]
 ```
+
+## How does it work ?
+
+#### Client
+
+![client operation](./imgs/client-operation.png)
+
+#### Server
+
+![server operation](./imgs/server-operation.png)
 
 ## Useful links
 
