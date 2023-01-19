@@ -24,13 +24,13 @@ Server must:
 
 ## Usage
 
-#### Server
+### Server
 
 ```bash
 ./server
 ```
 
-#### Client
+### Client
 
 ```bash
 ./client [server_pid] [message]
@@ -38,11 +38,11 @@ Server must:
 
 ## How does it work ?
 
-#### Client
+### Client
 
 ![client operation](./imgs/client-operation.png)
 
-#### Server
+### Server
 
 ![server operation](./imgs/server-operation.png)
 
