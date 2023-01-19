@@ -6,7 +6,7 @@
 /*   By: cbernot <cbernot@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:18:06 by cbernot           #+#    #+#             */
-/*   Updated: 2023/01/13 00:14:16 by cbernot          ###   ########.fr       */
+/*   Updated: 2023/01/18 08:31:48 by cbernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 /**
  * @brief Send a char byte by byte using SIGUSR1 and SIGUSR2.
- * @todo We can use a loop with a shorter duration to decrease the bit shifting due
- * to usleep imprecision.
+ * We use a loop with a shorter duration to decrease the bit shifting
+ * due to usleep imprecision.
  * 
  * @param pid PID of the server.
  * @param c The char to send.
@@ -24,6 +24,7 @@
 static void	send_char(int pid, int c)
 {
 	int	i;
+	int	j;
 
 	i = 0;
 	while (i < 8)
@@ -38,7 +39,12 @@ static void	send_char(int pid, int c)
 			if (kill(pid, SIGUSR2) != 0)
 				exit(EXIT_FAILURE);
 		}
-		usleep(100);
+		j = 0;
+		while (j < 10)
+		{
+			usleep(10);
+			j++;
+		}
 		i++;
 	}
 }
